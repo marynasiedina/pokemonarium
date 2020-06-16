@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACG,AAAD,eAAO,CAAC;EACN,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "../src/components/PokemonDesk/PokemonDesk.scss"
+    ],
+    "names": [],
+    "file": "PokemonDesk.css"
+}
