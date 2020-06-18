@@ -3,8 +3,7 @@ import Header from "./components/Header/Header";
 import PokemonDesk from "./components/PokemonDesk/PokemonDesk";
 import Profile from "./components/Profile/Profile";
 import pokedex from "./pokedex.json";
-
-console.log(pokedex);
+import api from "./components/config/api";
 
 export default class App extends Component {
   state = {
@@ -20,22 +19,22 @@ export default class App extends Component {
     },
     // myCollection: [],
     auth: false,
+    pokemon: null,
   };
 
   login = () => this.setState({ auth: true });
 
   myCollection = (name) => {
-    console.log(name);
     const { user } = this.state;
 
-    user.myCollection = [...new Set([...user.myCollection, name])];
-    user.countOfPokemons = user.myCollection.length;
+    let myCollection = [...new Set([...user.myCollection, name])];
+    let countOfPokemons = myCollection.length;
 
     this.setState({
       user: {
         ...this.state.user,
-        countOfPokemons: user.countOfPokemons,
-        myCollection: user.myCollection,
+        countOfPokemons: countOfPokemons,
+        myCollection: myCollection,
       },
     });
   };
@@ -49,6 +48,9 @@ export default class App extends Component {
   //     },
   //   });
   // };
+  updatePokemonList = () => {
+    api.get("pokemon/5");
+  };
 
   render() {
     let { projectName, projectDescription, pokemons, user, auth } = this.state;
@@ -67,5 +69,9 @@ export default class App extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    api.get("pokemon/2").then(({ data }) => console.log(data));
   }
 }
